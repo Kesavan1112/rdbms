@@ -1,0 +1,144 @@
+SQL> create table mark3514(rno number(10),name varchar(10),m1 number(10),m2 number(10),m3 number(10),tot varchar(10),avg varchar(10),res number(10));
+
+Table created.
+
+SQL> set serveroutput on;
+SQL> alter table mark3514 drop column tot;
+
+Table altered.
+
+SQL> desc mark3514;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ M1                                                 NUMBER(10)
+ M2                                                 NUMBER(10)
+ M3                                                 NUMBER(10)
+ AVG                                                VARCHAR2(10)
+ RES                                                NUMBER(10)
+
+SQL> alter table mark3514 add tot number(5);
+
+Table altered.
+
+SQL> desc mark3514;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ M1                                                 NUMBER(10)
+ M2                                                 NUMBER(10)
+ M3                                                 NUMBER(10)
+ AVG                                                VARCHAR2(10)
+ RES                                                NUMBER(10)
+ TOT                                                NUMBER(5)
+
+SQL> alter table mark3514 drop column avg;
+
+Table altered.
+
+SQL> alter table mark3514 add avg number(5);
+
+Table altered.
+
+SQL> alter table mark3514 drop column res;
+
+Table altered.
+
+SQL> alter table mark3514 add res varchar(5);
+
+Table altered.
+
+SQL> desc mark3514;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ RNO                                                NUMBER(10)
+ NAME                                               VARCHAR2(10)
+ M1                                                 NUMBER(10)
+ M2                                                 NUMBER(10)
+ M3                                                 NUMBER(10)
+ TOT                                                NUMBER(5)
+ AVG                                                NUMBER(5)
+ RES                                                VARCHAR2(5)
+
+SQL> DECLARE
+  2      a mark3514.rno%TYPE;
+  3      b mark3514.name%TYPE;
+  4      c mark3514.m1%TYPE;
+  5      d mark3514.m2%TYPE;
+  6      e mark3514.m3%TYPE;
+  7      f mark3514.tot%TYPE;
+  8      g NUMBER; -- Use NUMBER for the average to handle decimal places
+  9      h mark3514.res%TYPE;
+ 10  BEGIN
+ 11      -- Assign values from user input
+ 12      a := &rno;
+ 13      b := '&name';
+ 14      c := &m1;
+ 15      d := &m2;
+ 16      e := &m3;
+ 17
+ 18      -- Calculate total and average
+ 19      f := c + d + e;
+ 20      g := f / 3; -- Ensure that g is a NUMBER to handle decimal results
+ 21
+ 22      -- Determine result
+ 23      IF c >= 50 AND d >= 50 AND e >= 50 THEN
+ 24          h := 'pass';
+ 25      ELSE
+ 26          h := 'fail';
+ 27      END IF;
+ 28
+ 29      -- Insert the values into the mark3514 table
+ 30      INSERT INTO mark3514 (rno, name, m1, m2, m3, tot, avg, res)
+ 31      VALUES (a, b, c, d, e, f, g, h);
+ 32
+ 33      -- Update the record if it exists
+ 34      UPDATE mark3514
+ 35      SET tot = f, avg = g, res = h
+ 36      WHERE rno = a;
+ 37  END;
+ 38  /
+Enter value for rno: 56
+old  12:     a := &rno;
+new  12:     a := 56;
+Enter value for name: nimble
+old  13:     b := '&name';
+new  13:     b := 'nimble';
+Enter value for m1: 22
+old  14:     c := &m1;
+new  14:     c := 22;
+Enter value for m2: 34
+old  15:     d := &m2;
+new  15:     d := 34;
+Enter value for m3: 55
+old  16:     e := &m3;
+new  16:     e := 55;
+
+PL/SQL procedure successfully completed.
+
+SQL> select*from mark3514;
+
+       RNO NAME               M1         M2         M3        TOT        AVG
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+RES
+-----
+        56 nimble             22         34         55        111         37
+fail
+
+SQL> select*from mark3514;
+
+       RNO NAME               M1         M2         M3        TOT        AVG
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+RES
+-----
+        56 nimble             22         34         55        111         37
+fail
+
+        24 para               78         56         77        211         70
+pass
+
+        87 loin               45         67         78        190         63
+fail
+
