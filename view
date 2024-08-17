@@ -1,0 +1,12 @@
+SQL>  create view customerbranch as
+              select distinct c.customername,a.branchname
+              from customer018 c
+             join depositor018  d on c.customername = d.customername
+             join account018 a on d.accountnumber = a.accountnumber
+            union
+            select distinct c.customername,l.branchname
+            from customer018 c
+           join barrower018 b on c.customername = b.customername
+           join loan018 l on b.loannumber = l.loannumber;
+
+View created.
