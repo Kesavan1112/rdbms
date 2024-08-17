@@ -1,0 +1,23 @@
+SQL> create view cutekamal as select customername  from  customer3514;
+
+View created.
+
+SQL> select*from cutekamal;
+
+CUSTOMERNA
+----------
+k7
+kumar
+joshi
+john
+kumarason
+vishnu
+raja
+rani
+raman
+kamaraj
+
+10 rows selected.
+SQL> create view deets as select distinct c.customername,a.branchname from customer3514 c join depositor3514 d on c.customername=d.customername=d.customername join account3514 a on d.accountnumber=a.accountnumber union select distinct c customername,l.branchname from customer c join barrower3514 on c.customername=b.customername join loan3514 l
+
+
