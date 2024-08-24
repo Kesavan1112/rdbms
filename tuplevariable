@@ -1,0 +1,13 @@
+SQL>  select distinct t.branchname from bran t,bran s where t.assets>s.assets and s.branchcity='trichy';
+
+BRANCHNAME
+----------
+contonment
+junction
+marakadai
+palakarai
+postoffice
+thuvakudi
+tustolgate
+
+7 rows selected.
