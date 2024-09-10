@@ -1,0 +1,16 @@
+declare
+  s1 varchar2(20);
+  s2 varchar2(20);
+  c number(3);
+begin
+  s1 := '&string';  
+  c := length(s1);
+  while c > 0
+  loop
+    s2 := s2 || substr(s1, c, 1);
+    c := c - 1;
+  end loop;
+  dbms_output.put_line('The given string is: ' || s1);
+  dbms_output.put_line('Reverse string is: ' || s2);
+end;
+/
