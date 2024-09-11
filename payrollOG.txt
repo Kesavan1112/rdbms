@@ -1,0 +1,61 @@
+SQL> DECLARE
+  2    a pay3514.eno%TYPE;
+  3    b pay3514.ename%TYPE;
+  4    c pay3514.bp%TYPE;
+  5    d pay3514.hra%TYPE;
+  6    e pay3514.da%TYPE;
+  7    f pay3514.pf%TYPE;
+  8    g pay3514.gp%TYPE;
+  9    h pay3514.np%TYPE;
+ 10  BEGIN
+ 11    -- Initialize variables
+ 12    a := &eno;
+ 13    b := '&ename';
+ 14    c := &bp;
+ 15    d := &hra;
+ 16    e := &da;
+ 17    f := &pf;
+ 18
+ 19    -- Insert the record into the table
+ 20    INSERT INTO pay3514 (eno, ename, bp, hra, da, pf, gp, np)
+ 21    VALUES (a, b, c, d, e, f, NULL, NULL);
+ 22
+ 23    -- Calculate values
+ 24    g := c + d + e;
+ 25    h := g - f;
+ 26
+ 27    -- Update the record with calculated values
+ 28    UPDATE pay3514
+ 29    SET gp = g, np = h
+ 30    WHERE eno = a;
+ 31  END;
+ 32  /
+Enter value for eno: 503
+old  12:   a := &eno;
+new  12:   a := 503;
+Enter value for ename: guna
+old  13:   b := '&ename';
+new  13:   b := 'guna';
+Enter value for bp: 70000
+old  14:   c := &bp;
+new  14:   c := 70000;
+Enter value for hra: 3700
+old  15:   d := &hra;
+new  15:   d := 3700;
+Enter value for da: 2000
+old  16:   e := &da;
+new  16:   e := 2000;
+Enter value for pf: 1000
+old  17:   f := &pf;
+new  17:   f := 1000;
+
+PL/SQL procedure successfully completed.
+
+SQL> select*from pay3514;
+
+       ENO ENAME         BP        HRA         PF         GP         NP
+---------- ----- ---------- ---------- ---------- ---------- ----------
+        DA
+----------
+       503 guna       70000       3700       1000      75700      74700
+      2000
