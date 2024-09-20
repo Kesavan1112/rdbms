@@ -1,0 +1,18 @@
+declare 
+a student3514.rno%type;
+b student3514.sname%type;
+c student3514.tot_course%type;
+invalid_total exception;
+begin
+ a:='&rno';
+b:='&sname';
+c:=&tot_course;
+if(c>3)then
+raise invalid_total;
+end if;
+insert into student3514 values(a,b,c);
+exception 
+when invalid_total then
+dbms_output.put_Line('total number of courses cannot be more than 3');
+end;
+/       
