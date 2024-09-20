@@ -1,0 +1,33 @@
+
+
+
+SQL> create table student014(stno number(2),stname varchar(10),m1 number(3),m2 number(3),m3 number(3),tot number(3),avg number(5,2),res varchar(1),grade varchar(3));
+
+Table created.
+
+
+
+
+
+
+
+
+:tot:=:m1+:m2+:m3;
+:avg:=:tot/3;
+if :m1>=50 AND :m2>=50 AND :m3>=50 then 
+	:res:='p';
+else
+	:res:='f';
+end if;
+if :avg>=90 AND :res='p' then :grade:='o';
+elsif
+	:avg>=75 AND :avg<90 AND :res='p' then :grade:='d';
+	elsif
+	:avg>=60 AND :avg<75 AND :res='p' then :grade:='I';
+	elsif
+	:avg>=50 AND :avg<90 AND :res='p' then :grade:='II';
+	
+	
+	else 
+		:grade:='n';
+		end if;
