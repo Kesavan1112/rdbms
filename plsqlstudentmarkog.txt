@@ -1,0 +1,62 @@
+SQL> create table student3514(rno varchar(5),sname varchar(10),tot_course number(5));
+
+Table created.
+SQL> declare
+  2  a studentmar.rno%type;
+  3  b studentmar.sname%type;
+  4  c studentmar.m1%type;
+  5  d studentmar.m2%type;
+  6  e studentmar.m3%type;
+  7  f studentmar.tot%type;
+  8  g studentmar.avg%type;
+  9  h studentmar.res%type;
+ 10  cursor c1  is select rno,sname,m1,m2,m3,tot,avg,res from studentmar;
+ 11  begin
+ 12  a:=&rno;
+ 13  b:='&sname';
+ 14  c:=&m1;
+ 15  d:=&m2;
+ 16  e:=&m3;
+ 17  insert into studentmar(rno,sname,m1,m2,m3,tot,avg,res)values(a,b,c,d,e,f,g,h);
+ 18  
+ 19  open c1;
+ 20  f:=c+d+e;
+ 21  g:=f/3;
+ 22  if(c>=50 and d>=50 and e>=50)then 
+ 23  h:='pass';
+ 24  else 
+ 25  h:='fail';
+ 26  end if;
+ 27  update studentmar set res=h,avg=g,tot=f where rno=a;
+ 28  
+ 29  
+ 30  
+ 31  close c1;
+ 32  end;
+ 33  /
+Enter value for rno: 12
+old  12: a:=&rno;
+new  12: a:=12;
+Enter value for sname: dd
+old  13: b:='&sname';
+new  13: b:='dd';
+Enter value for m1: 67
+old  14: c:=&m1;
+new  14: c:=67;
+Enter value for m2: 45
+old  15: d:=&m2;
+new  15: d:=45;
+Enter value for m3: 44
+old  16: e:=&m3;
+new  16: e:=44;
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from studentmar;
+
+       RNO SNAME              M1         M2         M3        TOT        AVG
+---------- ---------- ---------- ---------- ---------- ---------- ----------
+RES
+----------
+        12 dd                 67         45         44        156         52
+fail
