@@ -1,0 +1,83 @@
+SQL>  Create function R(N number)
+  2   Return Integer is
+  3   begin
+  4  if(N=0) Then
+  5   Return 0;
+  6   else if (N=1) Then
+  7  Return 1;
+  8   else
+  9  
+ 10   Return (R(N-1)+R(N-2));
+ 11  
+ 12  end if;
+ 13  
+ 14  
+ 15  end if;
+ 16  
+ 17  end;
+ 18  
+ 19  /
+
+Function created.
+
+
+SQL>  declare
+  2  
+  3   N1 number;
+  4  
+  5   begin
+  6  
+  7  N1:=&N1;
+  8  
+  9   For I in 0.. N1
+ 10   Loop
+ 11  
+ 12  dbms_output.Put_line('The Fibonacci Series: ');
+ 13  dbms_output.put_line(R(I));
+ 14  end loop;
+ 15  end;
+ 16  /
+Enter value for n1: 12
+old   7: N1:=&N1;
+new   7: N1:=12;
+The Fibonacci Series:
+0
+The Fibonacci Series:
+1
+The Fibonacci Series:
+1
+The Fibonacci Series:
+2
+The Fibonacci Series:
+3
+The Fibonacci Series:
+5
+The Fibonacci Series:
+8
+The Fibonacci Series:
+13
+The Fibonacci Series:
+21
+The Fibonacci Series:
+34
+The Fibonacci Series:
+55
+The Fibonacci Series:
+89
+The Fibonacci Series:
+144
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n1: 2
+old   7: N1:=&N1;
+new   7: N1:=2;
+The Fibonacci Series:
+0
+The Fibonacci Series:
+1
+The Fibonacci Series:
+1
+
+PL/SQL procedure successfully completed.

@@ -1,0 +1,88 @@
+
+SQL> set serveroutput on;
+SQL> Create Function Fact (N number)
+  2  
+  3   Return integer is
+  4  
+  5   begin
+  6  
+  7   If (N=0) Then
+  8  
+  9   Return 1;
+ 10  
+ 11   Else
+ 12  
+ 13  Return (N*Fact (N-1));
+ 14   End if;
+ 15  
+ 16   End;
+ 17  /
+
+Function created.
+
+
+
+SQL> declare
+  2  
+  3  N Number;
+  4  
+  5  N1 number;
+  6  begin
+  7  
+  8  N:=&N;
+  9  
+ 10  N1:=Fact(N);
+ 11  
+ 12  dbms_output.put_line('*****');
+ 13  
+ 14  dbms_output.put_line('Factorial of'||N|| 'is' || N1);
+ 15  
+ 16  dbms_output.put_line('****'); 
+ 17  
+ 18  End;
+ 19  
+ 20  /
+Enter value for n: 23
+old   8: N:=&N;
+new   8: N:=23;
+*****
+Factorial of23is25852016738884976640000
+****
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 2
+old   8: N:=&N;
+new   8: N:=2;
+*****
+Factorial of2is2
+****
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 7
+old   8: N:=&N;
+new   8: N:=7;
+*****
+Factorial of7is5040
+****
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for n: 3
+old   8: N:=&N;
+new   8: N:=3;
+*****
+Factorial of3is6
+****
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+
+
+
+
