@@ -1,0 +1,15 @@
+if aincome > 250000 and aincome <= 500000 then
+    tax := (aincome - 250000) * 0.05;
+
+elsif aincome > 500000 and aincome <= 1000000 then
+    tax := (aincome - 500000) * 0.1 + 12500;
+
+elsif aincome > 1000000 and aincome <= 1500000 then
+    tax := (aincome - 1000000) * 0.2 + 62500;
+
+elsif aincome > 1500000 then
+    tax := (aincome - 1500000) * 0.3 + 162500;
+
+else
+    tax := 0;
+end if;
